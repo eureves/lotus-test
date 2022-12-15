@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd ./client && pnpm dev\" \"cd ./server && pnpm dev \"",
+    "build:front": "cd ./client && npm run build && cd ../ && rm -rf ./server/view && mv ./client/dist/ ./server/view",
+    "build:server": "cd ./server && npm run build",
+    "build": "npm run build:front && npm run build:server",
+    "start": "cd ./server && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

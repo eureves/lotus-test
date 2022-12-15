@@ -1,6 +1,8 @@
 import express from "express";
+import cors from "cors";
 import { Server } from "http";
 import { Server as ioServer, Socket } from "socket.io";
+import path from "path";
 
 type Bidder = {
   id: string;
@@ -22,7 +24,7 @@ type Room = {
   currentBidder: number;
 };
 
-const PORT = 8080;
+const PORT = 3000;
 const rooms: Room[] = [
   {
     id: "1",
@@ -63,9 +65,11 @@ const io = new ioServer(server, {
   },
 });
 
+app.use(cors());
+app.use(express.static(path.join(__dirname, "view")));
+
 app.get("/", (req, res) => {
-  console.log("get /");
-  res.send("welcome");
+  res.sendFile("/view/index.html");
 });
 
 io.on("connection", (socket) => {
