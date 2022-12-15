@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { Table } from "./components/Table/Table";
 import { Bidder } from "./shared/types/types";
 
-const socket = io("192.168.112.128:3000");
+const socket = io(import.meta.env.BASE_URL);
 
 function App() {
   const [connected, setConnected] = useState(false);
