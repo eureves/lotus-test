@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"cd ./client && pnpm dev\" \"pnpm dev:server \"",
-    "dev:server": "nodemon index.ts",
-    "build:client": "cd ./client && npm run build && cd ../ && rm -rf ./view && mv ./client/dist/ ./view",
+    "dev:server": "nodemon ./src/index.ts",
+    "build:client": "cd ./client && npm run build && cd ../ && rm -rf ./build/view && mv ./client/dist/ ./build/view",
     "build:server": "tsc",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:server && npm run build:client",
     "start": "cd ./server && npm run start"
   },
   "keywords": [],
