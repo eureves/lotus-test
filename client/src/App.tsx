@@ -6,6 +6,8 @@ import { Bidder } from "./shared/types/types";
 const api = import.meta.env.PROD
   ? import.meta.env.BASE_URL
   : "http://192.168.112.128:3000";
+console.log(api);
+
 const socket = io(api);
 
 function App() {
