@@ -1,5 +1,5 @@
 import { Bidder } from "../../shared/types/types";
-import { TableData } from "../TableColumn/TableColumn";
+import { TableColumn } from "../TableColumn/TableColumn";
 import { TableHeader } from "../TableHeader/TableHeader";
 import styles from "../../shared/styles/style.module.css";
 
@@ -15,7 +15,7 @@ export const Table = ({ bidders, currentBidder, timer }: Props) => {
       <TableHeader />
       {bidders.map((bidder, index) => {
         return (
-          <TableData
+          <TableColumn
             key={bidder.id}
             bidder={bidder}
             timer={index === currentBidder ? timer : null}

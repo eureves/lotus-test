@@ -3,13 +3,17 @@ import { io } from "socket.io-client";
 import { Table } from "./components/Table/Table";
 import { Bidder } from "./shared/types/types";
 
-const socket = io(import.meta.env.BASE_URL);
+const api = import.meta.env.PROD
+  ? import.meta.env.BASE_URL
+  : "http://192.168.112.128:3000";
+const socket = io(api);
 
 function App() {
   const [connected, setConnected] = useState(false);
   const [bidders, setBidders] = useState<Bidder[]>();
   const [currentBidder, setCurrentBidder] = useState(0);
   const [timer, setTimer] = useState(0);
+  const [rooms, setRoom] = useState(null);
 
   const handleConnect = () => {
     socket.emit("room:join", "1");
@@ -23,7 +27,7 @@ function App() {
     socket.on("connect", () => {
       setConnected(true);
     });
-    socket.on("timerUpdate", (counter) => {
+    socket.on("room:timerUpdate", (counter) => {
       setTimer(counter);
     });
     socket.on("room:bidders", (bidders) => {
@@ -32,16 +36,20 @@ function App() {
     socket.on("room:currentBidder", (bidder) => {
       setCurrentBidder(bidder);
     });
+
+    fetch(api + "/api/rooms")
+      .then((res) => res.json())
+      .then((res) => console.log(res));
   }, []);
 
   return (
-    <>
+    <div style={{ margin: "auto", width: "75vw" }}>
       {connected && bidders ? (
         <Table bidders={bidders} currentBidder={currentBidder} timer={timer} />
       ) : null}
       <button onClick={handleConnect}>Connect</button>
       <button onClick={handleStart}>Start</button>
-    </>
+    </div>
   );
 }
 
