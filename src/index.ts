@@ -8,7 +8,6 @@ import {
   joinRoom,
   startRoomTimer,
 } from "./services/room/roomService";
-import { apiRouter } from "./apiRouter";
 
 export const PORT = 3000;
 
@@ -23,11 +22,9 @@ const io = new ioServer(server, {
 app.use(cors());
 app.use(express.static(path.join(__dirname, "view")));
 
-app.get("/", (_, res) => {
+app.get("*", (_, res) => {
   res.sendFile("/view/index.html");
 });
-
-app.use("/api", apiRouter);
 
 io.on("connection", (socket) => {
   socket.on("room:join", (roomId) => {

@@ -8,3 +8,12 @@ export type Bidder = {
   payment: number;
   price: number;
 };
+
+export type Room = {
+  id: string;
+  timerId: NodeJS.Timer | undefined;
+  timer: number;
+  currentTime: number;
+  bidders: Bidder[];
+  currentBidder: number;
+};

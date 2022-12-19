@@ -10,7 +10,6 @@ const path_1 = __importDefault(require("path"));
 const http_1 = require("http");
 const socket_io_1 = require("socket.io");
 const roomService_1 = require("./services/room/roomService");
-const apiRouter_1 = require("./apiRouter");
 exports.PORT = 3000;
 const app = (0, express_1.default)();
 const server = new http_1.Server(app);
@@ -21,10 +20,9 @@ const io = new socket_io_1.Server(server, {
 });
 app.use((0, cors_1.default)());
 app.use(express_1.default.static(path_1.default.join(__dirname, "view")));
-app.get("/", (_, res) => {
+app.get("*", (_, res) => {
     res.sendFile("/view/index.html");
 });
-app.use("/api", apiRouter_1.apiRouter);
 io.on("connection", (socket) => {
     socket.on("room:join", (roomId) => {
         const room = (0, roomService_1.findRoom)(roomId);

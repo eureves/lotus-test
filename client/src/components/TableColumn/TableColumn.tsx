@@ -1,5 +1,5 @@
-import { Bidder } from "../../shared/types/types";
-import styles from "../../shared/styles/style.module.css";
+import { Bidder } from "../../../../src/types/types";
+import styles from "../../styles/style.module.css";
 import { Timer } from "../Timer/TImer";
 
 type Props = {

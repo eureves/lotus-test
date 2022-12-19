@@ -1,7 +1,7 @@
-import { Bidder } from "../../shared/types/types";
+import { Bidder } from "../../../../src/types/types";
 import { TableColumn } from "../TableColumn/TableColumn";
 import { TableHeader } from "../TableHeader/TableHeader";
-import styles from "../../shared/styles/style.module.css";
+import styles from "../../styles/style.module.css";
 
 type Props = {
   bidders: Bidder[];
